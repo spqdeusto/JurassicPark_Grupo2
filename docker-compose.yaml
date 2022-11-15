@@ -4,7 +4,6 @@ networks:
   test:
     name: fastapi_example
 
-
 services:
   mysql_db:
     image: mysql:8.0.31
@@ -32,6 +31,8 @@ services:
       - 8000:8000
     networks:
       - test
+    volumes:
+      - ./jurassicpark:/code/app
     environment:
       - MYSQL_URL=mysql://admin_db:admin_db@jurassicpark-db:3306/JurassicPark
     depends_on:
