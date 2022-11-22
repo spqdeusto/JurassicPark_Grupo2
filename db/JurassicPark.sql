@@ -126,7 +126,7 @@ CREATE TABLE `todoterreno` (
   KEY `recinto` (`recinto`),
   CONSTRAINT `todoterreno_ibfk_1` FOREIGN KEY (`recinto`) REFERENCES `recinto` (`nombre`) ON DELETE CASCADE,
   CONSTRAINT `todoterreno_chk_1` CHECK (((`pasajeros` > 1) and (`pasajeros` < 6)))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1021 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +135,7 @@ CREATE TABLE `todoterreno` (
 
 LOCK TABLES `todoterreno` WRITE;
 /*!40000 ALTER TABLE `todoterreno` DISABLE KEYS */;
+INSERT INTO `todoterreno` VALUES (1000,1,4,1,'Recinto del Dilophosaurus'),(1001,0,3,1,'Recinto del Dilophosaurus'),(1002,0,2,1,'Recinto del Dilophosaurus'),(1003,1,5,1,'Recinto del T-Rex'),(1004,1,3,1,'Recinto del T-Rex'),(1005,0,2,1,'Recinto del T-Rex'),(1006,0,5,1,'Recinto de los Velociraptores'),(1007,1,4,1,'Recinto de los Velociraptores'),(1008,1,5,1,'Recinto de los Velociraptores'),(1009,1,2,0,'Recinto de Brachiosaurus'),(1010,1,5,0,'Recinto de Brachiosaurus'),(1011,1,5,0,'Recinto de Brachiosaurus'),(1012,0,5,0,'Recinto de Parasaulophus'),(1013,0,5,0,'Recinto de Parasaulophus'),(1014,0,4,0,'Recinto de Parasaulophus'),(1015,1,4,0,'Recinto de Galliminus'),(1016,1,4,0,'Recinto de Galliminus'),(1017,1,3,0,'Recinto de Galliminus'),(1018,0,4,0,'Recinto de Triceratops'),(1019,1,3,0,'Recinto de Triceratops'),(1020,0,2,0,'Recinto de Triceratops');
 /*!40000 ALTER TABLE `todoterreno` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -147,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-22 10:39:05
+-- Dump completed on 2022-11-22 19:02:48
