@@ -42,3 +42,10 @@ def check_alarma(db: Session):
         return 1
     
     return 0
+
+    """def create_dinosaurio(db: Session, dinosaurio: schemas.Dinosaurio):
+    db_dinosaurio = models.Dinosaurio(nombre = dinosaurio.nombre, especie = dinosaurio.especie, edad = dinosaurio.edad, peso = dinosaurio.peso, sexo = dinosaurio.sexo, es_agresivo = dinosaurio.es_agresivo, recinto = dinosaurio.recinto)
+    db.add(db_dinosaurio)
+    db.commit()
+    db.refresh(db_dinosaurio)
+    return db_dinosaurio"""
