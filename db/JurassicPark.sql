@@ -54,6 +54,7 @@ CREATE TABLE `dinosaurio` (
 
 LOCK TABLES `dinosaurio` WRITE;
 /*!40000 ALTER TABLE `dinosaurio` DISABLE KEYS */;
+INSERT INTO `dinosaurio` VALUES ('Ainhoa',1,40,240,'H',1,'Recinto del Dilophosaurus'),('Aitor',1,23,100,'M',1,'Recinto del Dilophosaurus'),('Alvaro',1,60,300,'M',1,'Recinto del Dilophosaurus'),('Ana',6,900,967,'H',0,'Recinto de Galliminus'),('Andrea',5,88,889,'H',0,'Recinto de Parasaulophus'),('Ane',2,208,150,'H',1,'Recinto del T-Rex'),('Anton',3,500,600,'M',1,'Recinto de los Velociraptores'),('Aritz',3,10,40,'M',1,'Recinto de los Velociraptores'),('Borja',4,5,20,'M',0,'Recinto de Brachiosaurus'),('Elena',3,15,30,'M',1,'Recinto de los Velociraptores'),('Elvira',7,41,245,'H',0,'Recinto de Triceratops'),('Ester',5,74,770,'H',0,'Recinto de Parasaulophus'),('Fonsi',7,18,100,'M',0,'Recinto de Triceratops'),('Gorka',2,100,220,'M',1,'Recinto del T-Rex'),('Iker',2,45,130,'H',1,'Recinto del T-Rex'),('Irati',5,44,766,'H',0,'Recinto de Parasaulophus'),('Irene',4,22,240,'H',0,'Recinto de Brachiosaurus'),('Javier',7,82,666,'M',0,'Recinto de Triceratops'),('Jose',4,77,383,'M',0,'Recinto de Brachiosaurus'),('Juan',3,30,87,'M',1,'Recinto de los Velociraptores'),('Laura',4,47,99,'H',0,'Recinto de Brachiosaurus'),('Leire',5,66,400,'H',0,'Recinto de Parasaulophus'),('Mamen',4,90,900,'H',0,'Recinto de Brachiosaurus'),('Maria',6,21,210,'M',0,'Recinto de Galliminus'),('Mertxe',5,58,98,'H',0,'Recinto de Parasaulophus'),('Monica',6,90,240,'H',0,'Recinto de Galliminus'),('Naroa',1,22,200,'H',1,'Recinto del Dilophosaurus'),('Olatz',2,400,280,'H',1,'Recinto del T-Rex'),('Pablo',6,85,765,'M',0,'Recinto de Galliminus'),('Paloma',7,99,906,'H',0,'Recinto de Triceratops'),('Paul',3,550,320,'M',1,'Recinto de los Velociraptores'),('Ruben',1,300,350,'M',1,'Recinto del Dilophosaurus'),('Sebastian',6,600,600,'H',0,'Recinto de Galliminus'),('Tristan',7,11,35,'M',0,'Recinto de Triceratops'),('Unai',2,70,110,'M',1,'Recinto del T-Rex');
 /*!40000 ALTER TABLE `dinosaurio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +105,7 @@ CREATE TABLE `recinto` (
 
 LOCK TABLES `recinto` WRITE;
 /*!40000 ALTER TABLE `recinto` DISABLE KEYS */;
-INSERT INTO `recinto` VALUES ('Recinto de Brachiosaurus ',4,0),('Recinto de Galliminus',6,0),('Recinto de los Velociraptores',3,1),('Recinto de Parasaulophus',5,0),('Recinto de Triceratops',7,0),('Recinto del Dilophosaurus',1,1),('Recinto del T-Rex',2,1);
+INSERT INTO `recinto` VALUES ('Recinto de Brachiosaurus',4,0),('Recinto de Galliminus',6,0),('Recinto de los Velociraptores',3,1),('Recinto de Parasaulophus',5,0),('Recinto de Triceratops',7,0),('Recinto del Dilophosaurus',1,1),('Recinto del T-Rex',2,1);
 /*!40000 ALTER TABLE `recinto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,4 +147,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-22  9:42:22
+-- Dump completed on 2022-11-22 10:39:05
