@@ -34,6 +34,6 @@ services:
     volumes:
       - ./jurassicpark:/code/app
     environment:
-      - MYSQL_URL=mysql://admin_db:admin_db@jurassicpark-db:3306/JurassicPark
+      - MYSQL_URL=mysql://root:example@jurassicpark-db:3306/JurassicPark
     depends_on:
       - mysql_db
