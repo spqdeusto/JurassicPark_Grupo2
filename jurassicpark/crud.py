@@ -2,9 +2,14 @@ from sqlalchemy.orm import Session
 
 from . import models, schemas
 
+def get_dinosaurios(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Dinosaurio).offset(skip).limit(limit).all()
 
 def get_dinosaurio(db: Session, nombre: str):
     return db.query(models.Dinosaurio).filter(models.Dinosaurio.nombre == nombre).first()
+
+def get_todoterrenos(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Todoterreno).offset(skip).limit(limit).all()
 
 def get_todoterreno(db: Session, codigo: int):
     return db.query(models.Todoterreno).filter(models.Todoterreno.codigo == codigo).first()
@@ -12,34 +17,28 @@ def get_todoterreno(db: Session, codigo: int):
 def get_epecie(db: Session, especie: str):
     return db.query(models.Especie).filter(models.Especie.especie == especie).first()
 
+def get_recintos(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Recinto).offset(skip).limit(limit).all()
+
 def get_recinto(db: Session, nombre: str):
     return db.query(models.Recinto).filter(models.Recinto.nombre == nombre).first()
 
-
-# def get_user_by_email(db: Session, email: str):
-#     return db.query(models.User).filter(models.User.email == email).first()
-
-
-# def get_users(db: Session, skip: int = 0, limit: int = 100):
-#     return db.query(models.User).offset(skip).limit(limit).all()
-
-
-# def create_user(db: Session, user: schemas.UserCreate):
-#     fake_hashed_password = user.password + "notreallyhashed"
-#     db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
-#     db.add(db_user)
-#     db.commit()
-#     db.refresh(db_user)
-#     return db_user
-
-
-# def get_items(db: Session, skip: int = 0, limit: int = 100):
-#     return db.query(models.Item).offset(skip).limit(limit).all()
-
-
-# def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
-#     db_item = models.Item(**item.dict(), owner_id=user_id)
-#     db.add(db_item)
-#     db.commit()
-#     db.refresh(db_item)
-#     return db_item
+def check_alarma(db: Session):
+    db_max = db.query(models.Recinto).filter_by(sis_elec = False).\
+            join(models.Recinto.todoterrenos).filter_by(ruta = True).\
+            join(models.Recinto.dinosaurios).filter_by(es_agresivo = True).first()
+    if db_max != None:
+        return 3
+    
+    db_mid = db.query(models.Recinto).filter_by(sis_elec = False).\
+            join(models.Recinto.dinosaurios).filter_by(es_agresivo = True).first()
+    if db_mid != None:
+        return 2
+    
+    db_low = db.query(models.Recinto).filter_by(sis_elec = False).\
+            join(models.Recinto.dinosaurios).filter_by(es_agresivo = False).first()
+    print(db_low)
+    if db_low != None:
+        return 1
+    
+    return 0
