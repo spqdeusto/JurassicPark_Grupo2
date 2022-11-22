@@ -104,6 +104,7 @@ CREATE TABLE `recinto` (
 
 LOCK TABLES `recinto` WRITE;
 /*!40000 ALTER TABLE `recinto` DISABLE KEYS */;
+INSERT INTO `recinto` VALUES ('Recinto de Brachiosaurus ',4,0),('Recinto de Galliminus',6,0),('Recinto de los Velociraptores',3,1),('Recinto de Parasaulophus',5,0),('Recinto de Triceratops',7,0),('Recinto del Dilophosaurus',1,1),('Recinto del T-Rex',2,1);
 /*!40000 ALTER TABLE `recinto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-15 23:58:52
+-- Dump completed on 2022-11-22  9:42:22
