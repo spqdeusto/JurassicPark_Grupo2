@@ -1,8 +1,11 @@
 from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy import engine, true
 from sqlalchemy.orm import Session
 
-from . import crud, schemas
+from . import crud, models, schemas
 from .database import SessionLocal
+
+models.Base.metadata.create_all(bind=engine)
 
 # Para ejecutar servidor --> uvicorn JurasicPark:app --reload
 
@@ -27,7 +30,7 @@ async def get_dinosaurios(skip: int = 0, limit: int = 10, db: Session = Depends(
 async def get_dinosaurio(nombre: str, db: Session = Depends(get_db)):
     return crud.get_dinosaurio(db, nombre=nombre)
 
-@app.get("/dinosaurios", response_model=list[schemas.Dinosaurio])
+@app.post("/dinosaurios", response_model=schemas.DinosaurioCreate)
 async def create_dinosaurios(dinosaurio: schemas.DinosaurioCreate, db: Session = Depends(get_db)):
     db_dinosaurio = crud.get_dinosaurio_by_nombre(db, nombre = dinosaurio.nombre)
     if db_dinosaurio:
