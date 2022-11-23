@@ -13,6 +13,9 @@ class Dinosaurio(BaseModel):
     class Config:
         orm_mode = True
 
+class DinosaurioCreate(Dinosaurio):
+    pass
+
 class Especie(BaseModel):
     especie: str
 

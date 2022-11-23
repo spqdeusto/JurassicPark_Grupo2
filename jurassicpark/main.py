@@ -27,6 +27,13 @@ async def get_dinosaurios(skip: int = 0, limit: int = 10, db: Session = Depends(
 async def get_dinosaurio(nombre: str, db: Session = Depends(get_db)):
     return crud.get_dinosaurio(db, nombre=nombre)
 
+@app.get("/dinosaurios", response_model=list[schemas.Dinosaurio])
+async def create_dinosaurios(dinosaurio: schemas.DinosaurioCreate, db: Session = Depends(get_db)):
+    db_dinosaurio = crud.get_dinosaurio_by_nombre(db, nombre = dinosaurio.nombre)
+    if db_dinosaurio:
+        raise HTTPException(status_code=400, detail="Dinosaurio already registered")
+    return crud.create_dinosaurio(db=db,dinosaurio=dinosaurio)
+
 @app.get("/todoterrenos", response_model=list[schemas.Todoterreno])
 async def get_todoterrenos(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     return crud.get_todoterrenos(db, skip=skip, limit=limit)

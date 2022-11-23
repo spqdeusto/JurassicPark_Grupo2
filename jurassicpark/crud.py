@@ -49,3 +49,14 @@ def check_alarma(db: Session):
     db.commit()
     db.refresh(db_dinosaurio)
     return db_dinosaurio"""
+
+    def get_dinosaurio_by_nombre(db: Session, nombre: str):
+        return db.query(models.Dinosaurio).filter(models.Dinosaurio.nombre == nombre).first
+
+
+    def create_dinosaurio(db: Session, dinosaurio: schemas.DinosaurioCreate):
+        db_dinosaurio = models.Dinosaurio(nombre = dinosaurio.nombre, especie = dinosaurio.especie, edad = dinosaurio.edad, peso = dinosaurio.peso, sexo = dinosaurio.sexo, es_agresivo = dinosaurio.es_agresivo, recinto = dinosaurio.recinto)
+        db.add(db_dinosaurio)
+        db.commit()
+        db.refresh(db_dinosaurio)
+        return db_dinosaurio
