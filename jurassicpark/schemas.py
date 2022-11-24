@@ -19,6 +19,9 @@ class DinosaurioCreate(Dinosaurio):
 class Especie(BaseModel):
     especie: str
 
+class EspecieCreate(Especie):
+    pass
+
 class Todoterreno(BaseModel):
     codigo: int
     ruta: str
@@ -29,6 +32,9 @@ class Todoterreno(BaseModel):
     class Config:
         orm_mode = True
 
+class TodoterrenoCreate(Todoterreno):
+    pass
+
 class Recinto(BaseModel):
     nombre: str
     especie: str
@@ -38,4 +44,7 @@ class Recinto(BaseModel):
 
     class Config:
         orm_mode = True
+
+class RecintoCreate(Recinto):
+    pass
 

@@ -43,20 +43,43 @@ def check_alarma(db: Session):
     
     return 0
 
-    """def create_dinosaurio(db: Session, dinosaurio: schemas.Dinosaurio):
+def get_dinosaurio_by_nombre(db: Session, nombre: str):
+    return db.query(models.Dinosaurio).filter(models.Dinosaurio.nombre == nombre).first
+
+def get_recinto_by_nombre(db: Session, nombre: str):
+    return db.query(models.Recinto).filter(models.Recinto.nombre == nombre).first
+
+def get_especie_by_especie(db: Session, especie: str):
+    return db.query(models.Especie).filter(models.Especie.especie == especie).first
+
+def get_todoterreno_by_codigo(db: Session, codigo: int):
+    return db.query(models.Todoterreno).filter(models.Todoterreno.codigo == codigo).first
+
+
+def create_dinosaurio(db: Session, dinosaurio: schemas.DinosaurioCreate):
     db_dinosaurio = models.Dinosaurio(nombre = dinosaurio.nombre, especie = dinosaurio.especie, edad = dinosaurio.edad, peso = dinosaurio.peso, sexo = dinosaurio.sexo, es_agresivo = dinosaurio.es_agresivo, recinto = dinosaurio.recinto)
     db.add(db_dinosaurio)
     db.commit()
     db.refresh(db_dinosaurio)
-    return db_dinosaurio"""
+    return db_dinosaurio
 
-    def get_dinosaurio_by_nombre(db: Session, nombre: str):
-        return db.query(models.Dinosaurio).filter(models.Dinosaurio.nombre == nombre).first
+def create_especie(db: Session, especie: schemas.EspecieCreate):
+    db_especie = models.Especie(id = especie.id, especie = especie.especie)
+    db.add(db_especie)
+    db.commit()
+    db.refresh(db_especie)
+    return db_especie
 
+def create_recinto(db: Session, recinto: schemas.RecintoCreate):
+    db_recinto = models.Recinto(nombre = recinto.nombre, especie = recinto.especie, sis_elec = recinto.sis_elec, dinosaurios = recinto.dinosaurios, todoterrenos = recinto.todoterrenos)
+    db.add(db_recinto)
+    db.commit()
+    db.refresh(db_recinto)
+    return db_recinto
 
-    def create_dinosaurio(db: Session, dinosaurio: schemas.DinosaurioCreate):
-        db_dinosaurio = models.Dinosaurio(nombre = dinosaurio.nombre, especie = dinosaurio.especie, edad = dinosaurio.edad, peso = dinosaurio.peso, sexo = dinosaurio.sexo, es_agresivo = dinosaurio.es_agresivo, recinto = dinosaurio.recinto)
-        db.add(db_dinosaurio)
-        db.commit()
-        db.refresh(db_dinosaurio)
-        return db_dinosaurio
+def create_todoterreno(db: Session, todoterreno: schemas.TodoterrenoCreate):
+    db_todoterreno = models.Todoterreno(codigo = todoterreno.codigo, ruta = todoterreno.ruta, pasajeros = todoterreno.pasajeros, sis_seg = todoterreno.sis_seg, recinto = todoterreno.recinto)
+    db.add(db_todoterreno)
+    db.commit()
+    db.refresh(db_todoterreno)
+    return db_todoterreno
