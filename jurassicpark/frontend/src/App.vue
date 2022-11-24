@@ -1,69 +1,55 @@
 <template>
-  <div classs="body">
-    <section class="head">
-      <HeaderVue/>
-      <div>
-        <MenuVue/>
-      </div>
-    <section class="content">
-
-    </section>
-    <section class="foot">
-      <FooterVue/>
-    </section>
-    </section>
-  </div>
+  <img src="@/assets/logo.png" alt="" />
+  <nav>
+    <router-link to="/">Inicio</router-link> |
+    <router-link to="/dinosaurios">Dinosaurios</router-link> |
+    <router-link to="/recintos">Recintos</router-link> |
+    <router-link to="/todoterrenos">Todoterrenos</router-link> |
+    <router-link to="/especies">Especies</router-link>
+  </nav>
+  <router-view/>
+<div class="footer">
+  <h1>&copy;  Grupo 2: Proceso de software y calidad </h1>
+</div>
 </template>
 
-<script>
-import HeaderVue from "./components/HeaderVue.vue"
-import MenuVue from "./components/MenuVue.vue"
-import FooterVue from "./components/FooterVue.vue"
 
 
-export default {
-  name: "App",
-  components: {
-    HeaderVue,
-    MenuVue,
-    FooterVue
-  }
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 
-
-</script>
-
-<style scoped lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap");
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-
+img{
+  width: 20%;
 }
 
-.body{
-  display:flex;
-  flex-direction:column;
-  min-height: 100vh;
-  max-width: 100%;
-  margin: 0 auto;
-  top: 0;
-  left: 0;
-  right: 0;
+nav {
+  padding: 30px;
 }
 
-.head{
-  flex-grow: 1;
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
 }
 
-.foot{
-  flex-grow: 1;
-  
-
+nav a.router-link-exact-active {
+  color: darkred;
 }
 
+.footer{
+      
+      background:darkred;
+      text-align: center;
+      color: white;
+      position: fixed;
+      left:0;
+      bottom: 0;
+      width: 100%;
+      font-size: 60%;
+}
 </style>
