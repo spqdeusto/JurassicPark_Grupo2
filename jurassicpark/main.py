@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import engine, true
 from sqlalchemy.orm import Session
 
@@ -10,6 +11,19 @@ from .database import SessionLocal
 # Para ejecutar servidor --> uvicorn JurasicPark:app --reload
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:8081"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def get_db():
     db = SessionLocal()
