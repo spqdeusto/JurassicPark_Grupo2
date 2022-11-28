@@ -18,15 +18,27 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/RecintoView.vue')
   },
   {
-    path: '/especies',
-    name: 'especies',
-    component: () => import(/* webpackChunkName: "about" */ '../views/EspecieView.vue')
-  },
-  {
     path: '/todoterrenos',
     name: 'todoterrenos',
     component: () => import(/* webpackChunkName: "about" */ '../views/TodoterrenoView.vue')
   },
+  {
+    path: '/agregarDinosaurio',
+    name: 'agregarDinosaurio',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AgregarDinosaurio.vue')
+  },
+  {
+    path: '/agregarRecinto',
+    name: 'agregarRecinto',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AgregarRecinto.vue')
+  },
+  {
+    path: '/agregarTodoterreno',
+    name: 'agregarTodoterreno',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AgregarTodoterreno.vue')
+  },
+
+ 
 ]
 
 const router = createRouter({

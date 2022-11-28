@@ -4,8 +4,7 @@
     <router-link to="/">Inicio</router-link> |
     <router-link to="/dinosaurios">Dinosaurios</router-link> |
     <router-link to="/recintos">Recintos</router-link> |
-    <router-link to="/todoterrenos">Todoterrenos</router-link> |
-    <router-link to="/especies">Especies</router-link>
+    <router-link to="/todoterrenos">Todoterrenos</router-link> 
   </nav>
   <router-view/>
 <div class="footer">
@@ -24,6 +23,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 300vh;
 }
 
 img{
