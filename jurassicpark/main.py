@@ -44,12 +44,12 @@ async def get_dinosaurios(skip: int = 0, limit: int = 10, db: Session = Depends(
 async def get_dinosaurio(nombre: str, db: Session = Depends(get_db)):
     return crud.get_dinosaurio(db, nombre=nombre)
 
-"""@app.post("/dinosaurio/create", response_model=schemas.DinosaurioCreate)
-async def create_dinosaurios(dinosaurio: schemas.DinosaurioCreate, db: Session = Depends(get_db)):
-    db_dinosaurio = crud.get_dinosaurio_by_nombre(db, nombre = dinosaurio.nombre)
+@app.post("/dinosaurio/create", response_model=schemas.Dinosaurio)
+async def create_dinosaurios(dinosaurio: schemas.Dinosaurio, db: Session = Depends(get_db)):
+    db_dinosaurio = crud.get_dinosaurio(db, nombre = dinosaurio.nombre)
     if db_dinosaurio:
         raise HTTPException(status_code=400, detail="Dinosaurio already registered")
-    return crud.create_dinosaurio(db=db,dinosaurio=dinosaurio)"""
+    return crud.create_dinosaurio(db=db,dinosaurio=dinosaurio)
 
 @app.get("/todoterrenos", response_model=list[schemas.Todoterreno])
 async def get_todoterrenos(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
@@ -59,23 +59,16 @@ async def get_todoterrenos(skip: int = 0, limit: int = 10, db: Session = Depends
 async def get_todoterreno(codigo: int, db: Session = Depends(get_db)):
     return crud.get_todoterreno(db, codigo=codigo)
 
-"""@app.post("/todoterreno/create", response_model=schemas.TodoterrenoCreate)
-async def create_todoterrenos(todoterreno: schemas.TodoterrenoCreate, db: Session = Depends(get_db)):
-    db_todoterreno = crud.get_todoterreno_by_codigo(db, codigo = todoterreno.codigo)
+@app.post("/todoterreno/create", response_model=schemas.Todoterreno)
+async def create_todoterrenos(todoterreno: schemas.Todoterreno, db: Session = Depends(get_db)):
+    db_todoterreno = crud.get_todoterreno(db, codigo = todoterreno.codigo)
     if db_todoterreno:
         raise HTTPException(status_code=400, detail="Todoterreno already registered")
-    return crud.create_todoterreno(db=db,todoterreno=todoterreno)"""
+    return crud.create_todoterreno(db=db,todoterreno=todoterreno)
 
 @app.get("/especie/{especie}", response_model=schemas.Especie)
 async def get_especie(especie: str, db: Session = Depends(get_db)):
     return crud.get_epecie(db, especie=especie)
-
-"""@app.post("/especie/create", response_model=schemas.EspecieCreate)
-async def create_especies(especie: schemas.EspecieCreate, db: Session = Depends(get_db)):
-    db_especie = crud.get_especie_by_especie(db, especie = especie.especie)
-    if db_especie:
-        raise HTTPException(status_code=400, detail="Especie already registered")
-    return crud.create_especie(db=db,especie=especie)"""
 
 @app.get("/recintos", response_model=list[schemas.Recinto])
 async def get_recintos(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
@@ -85,12 +78,17 @@ async def get_recintos(skip: int = 0, limit: int = 10, db: Session = Depends(get
 async def get_recinto(nombre: str, db: Session = Depends(get_db)):
     return crud.get_recinto(db, nombre=nombre)
 
-"""@app.post("/recinto/create", response_model=schemas.RecintoCreate)
-async def create_especies(recinto: schemas.RecintoCreate, db: Session = Depends(get_db)):
-    db_recinto = crud.get_recinto_by_nombre(db, recinto = recinto.nombre)
+@app.post("/recinto/create", response_model=schemas.Recinto)
+async def create_especies(recinto: schemas.Recinto, db: Session = Depends(get_db)):
+    db_recinto = crud.get_recinto(db, recinto = recinto.nombre)
     if db_recinto:
         raise HTTPException(status_code=400, detail="Recinto already registered")
-    return crud.create_recinto(db=db,recinto=recinto)"""
+    return crud.create_recinto(db=db,recinto=recinto)
+
+@app.get("/changeelectricidad/{nombre}")
+async def change_alarma(nombre: str, db: Session = Depends(get_db)):
+    crud.change_sis_elec(db, nombre)
+    return {"success" : True}
 
 @app.get("/alarma")
 async def get_alarma(db: Session = Depends(get_db)):

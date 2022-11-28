@@ -3,25 +3,17 @@ from pydantic import ValidationError
 
 class Dinosaurio(BaseModel):
     nombre: str
-    especie: str
+    especie: int
     edad: int
     peso: int
     sexo: str
-    es_agresivo: bool
+    es_agresivo: bool 
     recinto: str
 
     class Config:
         orm_mode = True
-
-class DinosaurioCreate(Dinosaurio):
-    pass
-
 class Especie(BaseModel):
     especie: str
-
-class EspecieCreate(Especie):
-    pass
-
 class Todoterreno(BaseModel):
     codigo: int
     ruta: str
@@ -31,10 +23,6 @@ class Todoterreno(BaseModel):
 
     class Config:
         orm_mode = True
-
-class TodoterrenoCreate(Todoterreno):
-    pass
-
 class Recinto(BaseModel):
     nombre: str
     especie: str
@@ -45,6 +33,4 @@ class Recinto(BaseModel):
     class Config:
         orm_mode = True
 
-class RecintoCreate(Recinto):
-    pass
 
