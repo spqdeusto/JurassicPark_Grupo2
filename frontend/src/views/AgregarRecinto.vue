@@ -1,10 +1,23 @@
 <template>
     <div class="about">
       <h1>Recintos</h1>
-        
-            <li><input v-model="newLanguage" type="text" placeholder="Nombre recinto" @keyup.enter="saveRecinto"></li>
-            <br>
-            <li><input v-model="newLanguage" type="text" placeholder="Estado sist.eléctrico" @keyup.enter="saveRecinto"></li>
+        <p>Nombre del recinto:
+            <select v-model="selected">
+              <option disabled selected="">Nombre del recinto</option>
+              <option>Recinto del Dilophosaurus</option>
+              <option>Recinto del T-Rex</option>
+              <option>Recinto del Velociraptor</option>
+              <option>Recinto del Brachiosaurus</option>
+              <option>Recinto del Parasaulophus</option>
+              <option>Recinto del Triceratops</option>
+            </select></p>
+           
+            <p>Sistema electrico:
+            <select v-model="selected">
+              <option disabled selected="">Sistema eléctrico</option>
+              <option>Verdadero-Electricidad activada</option>
+              <option>Falso-Electricidad desactivada</option>
+            </select> </p>
             <br>
       <button @click="saveRecinto">Agregar nuevo recinto</button>
     </div>
@@ -21,13 +34,7 @@ export default {
     axios.get("http://localhost:8000/recintos").then((result) => {
       this.result = result.data;
     })
-  },
-methods:{
-		saveDinosaurio: function(event){
-			this.languages.push(this.newLanguage);
-			this.newLanguage = ""
-		}
-	}
+  }
 };
 </script>
 

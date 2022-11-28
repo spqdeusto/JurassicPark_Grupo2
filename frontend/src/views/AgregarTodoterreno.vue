@@ -1,21 +1,34 @@
 <template>
     <div class="about">
       <h1>Todoterrenos</h1>
-        
-            <li><input v-model="newLanguage" type="text" placeholder="Código todoterreno" @keyup.enter="saveRecinto"></li>
+            <li><p>Código del todoterreno: <input v-model="newTodoterreno" type="text" placeholder="Código todoterreno" @keyup.enter="saveTodoterreno"></p></li>
+                      
+            <p>¿Está en ruta el todoterreno?:
+            <select v-model="selected">
+              <option disabled selected="">¿Está en ruta el todoterreno?</option>
+              <option>Si</option>
+              <option>No</option>
+            </select> </p>
+            
+            <p>Número de visitantes:
+            <select v-model="selected">
+              <option disabled selected="">Número de visitantes</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select> </p>
+
+            <p>Sistema de seguridad:
+            <select v-model="selected">
+              <option disabled selected="">Sistema de seguridad</option>
+              <option>Activado</option>
+              <option>Desactivado</option>
+            </select> </p>
             <br>
-            <li><input type="radio" id="true" value="Está en ruta" v-model="picked" @keyup.enter="saveRecinto"></li>
-              <label for="true">Está en ruta</label>
-            <li><input type="radio" id="false" value="No está en ruta" v-model="picked" @keyup.enter="saveRecinto"></li>
-              <label for="false">No está en ruta</label>
-            <br>
-            <br>
-            <li><input v-model="newLanguage" type="text" placeholder="Número de visitantes" @keyup.enter="saveRecinto"></li>
-            <br>
-            <li><input v-model="newLanguage" type="text" placeholder="Sistema de seguridad" @keyup.enter="saveRecinto"></li>
-            <br>
-      <button @click="saveRecinto">Agregar nuevo todoterreno</button>
-    </div>
+            <button @click="saveTodoterreno">Agregar nuevo todoterreno</button>
+        </div>
 </template>
 
 
@@ -24,7 +37,6 @@
 	
 <script>
 import axios from "axios";
-import { vModelCheckbox } from "vue";
 export default {
   data: () => ({
     result: null
@@ -33,17 +45,14 @@ export default {
     axios.get("http://localhost:8000/todoterrenos").then((result) => {
       this.result = result.data;
     })
-  },
-methods:{
-		saveDinosaurio: function(event){
-			this.languages.push(this.newLanguage);
-			this.newLanguage = ""
-		}
-	}
+  }
+  
 };
 </script>
 
 <style>
+
+
 
 button{
   color:darkred
@@ -51,6 +60,9 @@ button{
 
 li{
     list-style: none;
+
+    
+    
 }
 
 </style>
