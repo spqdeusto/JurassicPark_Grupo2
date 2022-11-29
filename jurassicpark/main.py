@@ -6,10 +6,6 @@ from sqlalchemy.orm import Session
 from . import crud, models, schemas
 from .database import SessionLocal
 
-#models.Base.metadata.create_all(bind=engine)
-
-# Para ejecutar servidor --> uvicorn JurasicPark:app --reload
-
 app = FastAPI()
 
 origins = [
@@ -32,13 +28,12 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/")
-async def root():
-    return {"message": "myresult"}
+
+### DINOSAURIOS ###        
 
 @app.get("/dinosaurios", response_model=list[schemas.Dinosaurio])
-async def get_dinosaurios(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    return crud.get_dinosaurios(db, skip=skip, limit=limit)
+async def get_dinosaurios(db: Session = Depends(get_db)):
+    return crud.get_dinosaurios(db, skip=0, limit=10)
 
 @app.get("/dinosaurio/{nombre}", response_model=schemas.Dinosaurio)
 async def get_dinosaurio(nombre: str, db: Session = Depends(get_db)):
@@ -50,6 +45,15 @@ async def create_dinosaurios(dinosaurio: schemas.Dinosaurio, db: Session = Depen
     if db_dinosaurio:
         raise HTTPException(status_code=400, detail="Dinosaurio already registered")
     return crud.create_dinosaurio(db=db,dinosaurio=dinosaurio)
+
+@app.get("/dinosaurio/delete/{nombre}")
+async def delete_dinosaurio(nombre: str, db: Session = Depends(get_db)):
+    crud.delete_dinosaurio(db, nombre=nombre)
+    return {"message" : f"El dinosaurio {nombre} ha sido eliminado"}
+
+
+
+### TODOTERRENOS ###
 
 @app.get("/todoterrenos", response_model=list[schemas.Todoterreno])
 async def get_todoterrenos(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
@@ -66,29 +70,40 @@ async def create_todoterrenos(todoterreno: schemas.Todoterreno, db: Session = De
         raise HTTPException(status_code=400, detail="Todoterreno already registered")
     return crud.create_todoterreno(db=db,todoterreno=todoterreno)
 
+@app.get("/todoterreno/delete/{codigo}")
+async def delete_dinosaurio(codigo: int, db: Session = Depends(get_db)):
+    crud.delete_todoterreno(db, codigo=codigo)
+    return {"message" : f"El todoterreno {codigo} ha sido eliminado"}
+
+
+
+### ESPECIES ###
+
 @app.get("/especie/{especie}", response_model=schemas.Especie)
 async def get_especie(especie: str, db: Session = Depends(get_db)):
     return crud.get_epecie(db, especie=especie)
 
+
+
+### RECINTOS ###
+
 @app.get("/recintos", response_model=list[schemas.Recinto])
-async def get_recintos(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    return crud.get_recintos(db, skip=skip, limit=limit)
+async def get_recintos(db: Session = Depends(get_db)):
+    return crud.get_recintos(db)
 
 @app.get("/recinto/{nombre}", response_model=schemas.Recinto)
 async def get_recinto(nombre: str, db: Session = Depends(get_db)):
     return crud.get_recinto(db, nombre=nombre)
 
-@app.post("/recinto/create", response_model=schemas.Recinto)
-async def create_especies(recinto: schemas.Recinto, db: Session = Depends(get_db)):
-    db_recinto = crud.get_recinto(db, recinto = recinto.nombre)
-    if db_recinto:
-        raise HTTPException(status_code=400, detail="Recinto already registered")
-    return crud.create_recinto(db=db,recinto=recinto)
-
-@app.get("/changeelectricidad/{nombre}")
-async def change_alarma(nombre: str, db: Session = Depends(get_db)):
-    crud.change_sis_elec(db, nombre)
+@app.get("/changeelectricidad/{especie}")
+async def change_alarma(especie: int, db: Session = Depends(get_db)):
+    crud.change_sis_elec(db, especie)
+    crud.change_sis_seg(db)
     return {"success" : True}
+
+
+
+### ALARMA ###
 
 @app.get("/alarma")
 async def get_alarma(db: Session = Depends(get_db)):
