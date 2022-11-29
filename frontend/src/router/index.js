@@ -28,11 +28,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AgregarDinosaurio.vue')
   },
   {
-    path: '/agregarRecinto',
-    name: 'agregarRecinto',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AgregarRecinto.vue')
-  },
-  {
     path: '/agregarTodoterreno',
     name: 'agregarTodoterreno',
     component: () => import(/* webpackChunkName: "about" */ '../views/AgregarTodoterreno.vue')
