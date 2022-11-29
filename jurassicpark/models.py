@@ -1,13 +1,14 @@
 from sqlalchemy import Boolean, CheckConstraint, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from .database import Base, engine
+from database import Base, engine
 
 class Especie(Base):
     __tablename__ = "especie"
 
     id = Column(Integer, primary_key=True)
     especie = Column(String(25), nullable=False)
+    recinto = Column(Integer, ForeignKey("recinto.codigo", ondelete="CASCADE"))
 
 class Dinosaurio(Base):
     __tablename__ = "dinosaurio"
@@ -18,17 +19,16 @@ class Dinosaurio(Base):
     peso = Column(Integer)
     sexo = Column(String(2))
     es_agresivo = Column(Boolean(create_constraint=True), nullable=False)
-    recinto = Column(String(100), ForeignKey("recinto.nombre", ondelete="CASCADE"), nullable=False)
 
 
 class Recinto(Base):
     __tablename__ = "recinto"
 
-    nombre = Column(String(100), primary_key=True)
-    especie = Column(Integer, ForeignKey("especie.id", ondelete="CASCADE"), nullable=False)
+    codigo = Column(Integer, primary_key=True)
+    nombre = Column(String(100))
     sis_elec = Column(Boolean(create_constraint=True), nullable=False)
 
-    dinosaurios = relationship("Dinosaurio")
+    especies = relationship("Especie")
     todoterrenos = relationship("Todoterreno")
 
 class Todoterreno(Base):
@@ -38,5 +38,6 @@ class Todoterreno(Base):
     ruta = Column(Boolean(create_constraint=True), nullable=False)
     pasajeros = Column(Integer, CheckConstraint("pasajeros > 1 AND pasajeros < 6"))
     sis_seg = Column(Boolean(create_constraint=True), nullable=False)
-    recinto = Column(String(100), ForeignKey("recinto.nombre", ondelete="CASCADE"), nullable=False)
+    recinto = Column(Integer, ForeignKey("recinto.codigo", ondelete="CASCADE"), nullable=False)
 
+#models.Base.metadata.create_all(bind=engine)

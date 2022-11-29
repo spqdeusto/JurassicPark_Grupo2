@@ -8,7 +8,6 @@ class Dinosaurio(BaseModel):
     peso: int
     sexo: str
     es_agresivo: bool 
-    recinto: str
 
     class Config:
         orm_mode = True
@@ -24,10 +23,10 @@ class Todoterreno(BaseModel):
     class Config:
         orm_mode = True
 class Recinto(BaseModel):
+    codigo: int
     nombre: str
     especie: str
     sis_elec: bool
-    dinosaurios: list[Dinosaurio] = []
     todoterrenos: list[Todoterreno] = []
 
     class Config:
