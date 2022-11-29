@@ -12,21 +12,23 @@ class Dinosaurio(BaseModel):
     class Config:
         orm_mode = True
 class Especie(BaseModel):
+    id: int
     especie: str
+    recinto: int
 class Todoterreno(BaseModel):
     codigo: int
-    ruta: str
+    ruta: bool
     pasajeros: int
     sis_seg: bool
-    recinto: str
+    recinto: int
 
     class Config:
         orm_mode = True
 class Recinto(BaseModel):
     codigo: int
     nombre: str
-    especie: str
     sis_elec: bool
+    especies: list[Especie] = []
     todoterrenos: list[Todoterreno] = []
 
     class Config:
