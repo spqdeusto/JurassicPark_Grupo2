@@ -35,6 +35,13 @@ def create_todoterreno(db: Session, todoterreno: schemas.Todoterreno):
 def get_epecie(db: Session, especie: str):
     return db.query(models.Especie).filter(models.Especie.especie == especie).first()
 
+def change_sis_seg(db: Session, codigo: int):
+    print(get_todoterreno(db, codigo))
+    todoterreno = models.Todoterreno(get_todoterreno(db, codigo))
+    todoterreno.sis_seg = not todoterreno.sis_seg
+    db.commit()
+    return check_alarma()
+
 
 ### RECINTOS
 
@@ -57,6 +64,7 @@ def change_sis_elec(db: Session, nombre: str):
     recinto = models.Recinto(get_recinto(db, nombre))
     recinto.sis_elec = not recinto.sis_elec
     db.commit()
+    return check_alarma()
 
 
 
