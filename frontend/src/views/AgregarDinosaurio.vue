@@ -36,9 +36,6 @@
  </div>
 </template>
 
-
-
-
 	
 <script>
 import axios from "axios";
@@ -50,20 +47,30 @@ export default {
       peso: "",
       especie: "",
       sexo: "",
-      es_agresivo: ""
+      es_agresivo: "",
+      parametros: {}
     }
   },
   methods:{
     submitForm(){
+      this.parametros = {
+        nombre: this.nombre,
+        edad: parseInt(this.edad(parseInt(edad))),
+        peso: this.peso(parseInt(peso)),
+        especie: this.especie(parseInt(especie)),
+        sexo: this.sexo,
+        es_agresivo: this.es_agresivo(bool(es_agresivo)),
+
+      }
+
     
       axios.post("http://localhost:8000/dinosaurio/create",{
-        nombre: this.nombre,
-        edad: this.edad,
-        peso: this.peso,
-        especie: this.especie,
-        sexo: this.sexo,
-        es_agresivo: this.es_agresivo
-
+        nombre: this.parametros.nombre,
+        edad: this.parametros.edad,
+        peso: this.parametros.peso,
+        especie: this.parametros.especie,
+        sexo: this.parametros.sexo,
+        es_agresivo: this.parametros.es_agresivo
       }).then(response =>{
         this.success="Data saved successfully";
         this.response=JSON.stringify(response, null, 2);
