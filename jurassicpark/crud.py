@@ -45,7 +45,7 @@ def create_dinosaurio(db: Session, dinosaurio: schemas.Dinosaurio) -> models.Din
             db_dinosaurio (``models.Dinosaurio``): una instancia del objeto de tipo ``models.Dinosaurio`` que hemos creado
             
     '''
-    db_dinosaurio = models.Dinosaurio(nombre = dinosaurio.nombre, especie = dinosaurio.especie, edad = dinosaurio.edad, peso = dinosaurio.peso, sexo = dinosaurio.sexo, es_agresivo = dinosaurio.es_agresivo, recinto = dinosaurio.recinto)
+    db_dinosaurio = models.Dinosaurio(nombre = dinosaurio.nombre, especie = dinosaurio.especie, edad = dinosaurio.edad, peso = dinosaurio.peso, sexo = dinosaurio.sexo, es_agresivo = dinosaurio.es_agresivo)
     db.add(db_dinosaurio)
     db.commit()
     db.refresh(db_dinosaurio)
