@@ -33,7 +33,7 @@ def get_db():
 
 @app.get("/dinosaurios", response_model=list[schemas.Dinosaurio])
 async def get_dinosaurios(db: Session = Depends(get_db)):
-    return crud.get_dinosaurios(db, skip=0, limit=10)
+    return crud.get_dinosaurios(db, limit=10)
 
 @app.get("/dinosaurio/{nombre}", response_model=schemas.Dinosaurio)
 async def get_dinosaurio(nombre: str, db: Session = Depends(get_db)):
