@@ -40,6 +40,7 @@ button{
 }
 h2{
   font-size: medium;
+  margin-top: 3%;
 }
 
 </style>

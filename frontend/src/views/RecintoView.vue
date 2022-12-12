@@ -3,8 +3,8 @@
       <h1>Recintos</h1>
       <h2>Recintos disponibles en el parque:</h2>     
       <div v-for="recinto in result" class="content">
-        <p>{{recinto.nombre}}</p>
-          <button>Eliminar</button> | <button>Modificar</button>
+        <p>Recinto: {{recinto.nombre}}</p>
+          <button>Eliminar</button>
           <li v-for="l in languages">
           {{ l }}
           </li>
@@ -34,6 +34,10 @@ export default {
 
 button{
   color:darkred
+}
+h2{
+  font-size: medium;
+  margin-top: 3%;
 }
 
 </style>

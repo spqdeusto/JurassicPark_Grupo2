@@ -6,7 +6,7 @@
       <h2>Dinosaurios disponibles en el parque:</h2>
       <div v-for="dinosaurio in result" class="content">
         <p>Dinosaurio: {{dinosaurio.nombre}}</p>
-          <button>Eliminar</button> | <router-link to="/modificarDinosaurio"><button @click="modifyDinosaurio">Modificar</button></router-link>
+          <button onClick = delete>Eliminar</button> | <router-link to="/modificarDinosaurio"><button @click="modifyDinosaurio">Modificar</button></router-link>
           <li v-for="l in languages">
           {{ l }}
           </li>
@@ -26,8 +26,15 @@ export default {
       this.result = result.data;
     })
   },
-  delete() {
-    axios.delete("http://localhost:8000/dinosaurios")
+  delete(){
+    axios.delete("http://localhost:8000/dinosaurio/{nombre}")
+    .then(response => {
+      console.log("deleted", response);
+      setData(response.data);
+    })
+    .catch(error =>{
+      console.log(error)
+    })
   }
 };
 </script>
@@ -39,6 +46,7 @@ button{
 }
 h2{
   font-size: medium;
+  margin-top: 3%;
 }
 
 </style>
