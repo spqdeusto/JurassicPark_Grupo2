@@ -2,10 +2,17 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "mysql://root:example@jurassicpark-db:3306/JurassicPark"
+LOCAL_SQLALCHEMY_DATABASE_URL = "mysql://root:example@localhost:3306/JurassicPark"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+local_engine = create_engine(LOCAL_SQLALCHEMY_DATABASE_URL)
 
-SessionLocal = sessionmaker(bind=engine)
+local_SessionLocal = sessionmaker(bind=local_engine)
+
+
+DOCKER_SQLALCHEMY_DATABASE_URL = "mysql://root:example@jurassicpark-db:3306/JurassicPark"
+
+docker_engine = create_engine(DOCKER_SQLALCHEMY_DATABASE_URL)
+
+SessionLocal = sessionmaker(bind=docker_engine)
 
 Base = declarative_base()

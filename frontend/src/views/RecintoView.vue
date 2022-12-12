@@ -1,7 +1,7 @@
 <template>
     <div class="about">
-      <h1>Recinto</h1>
-           
+      <h1>Recintos</h1>
+      <h2>Recintos disponibles en el parque:</h2>     
       <div v-for="recinto in result" class="content">
         <p>{{recinto.nombre}}</p>
           <button>Eliminar</button> | <button>Modificar</button>
@@ -23,6 +23,9 @@ export default {
     axios.get("http://localhost:8000/recintos").then((result) => {
       this.result = result.data;
     })
+  },
+  delete() {
+    axios.delete("http://localhost:8000/recintos")
   }
 };
 </script>

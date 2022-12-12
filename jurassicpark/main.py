@@ -78,7 +78,7 @@ async def create_dinosaurios(dinosaurio: schemas.Dinosaurio, db: Session = Depen
         raise HTTPException(status_code=400, detail="Dinosaurio already registered")
     return crud.create_dinosaurio(db=db,dinosaurio=dinosaurio)
 
-@app.get("/dinosaurio/delete/{nombre}")
+@app.delete("/dinosaurio/{nombre}")
 async def delete_dinosaurio(nombre: str, db: Session = Depends(get_db)):
     '''
     Método que elimina un dinosaurios.
@@ -108,7 +108,7 @@ async def get_todoterrenos(skip: int = 0, limit: int = 10, db: Session = Depends
             Una lista de ``schemas.Todoterreno``
             
     '''
-    return crud.get_todoterrenos(db, skip=skip, limit=limit)
+    return crud.get_todoterrenos(db, limit=limit)
 
 @app.get("/todoterreno/{codigo}", response_model=schemas.Todoterreno)
 async def get_todoterreno(codigo: int, db: Session = Depends(get_db)):

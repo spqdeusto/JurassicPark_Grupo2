@@ -70,13 +70,7 @@ export default {
       }).catch(error => {
         this.response = "Error: " + error.response.status
       })
-    }
-  },
-
-  created() {
-    axios.get("http://localhost:8000/dinosaurios").then((result) => {
-      this.result = result.data;
-    })
+    },
   }
 }
 </script>

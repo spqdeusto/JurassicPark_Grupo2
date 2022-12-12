@@ -32,6 +32,11 @@ const routes = [
     name: 'agregarTodoterreno',
     component: () => import(/* webpackChunkName: "about" */ '../views/AgregarTodoterreno.vue')
   },
+  {
+    path: '/modificarDinosaurio',
+    name: 'modificarDinosaurio',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ModificarDinosaurio.vue')
+  },
 
  
 ]

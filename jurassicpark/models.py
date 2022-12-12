@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, CheckConstraint, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from .database import Base, engine
+from .database import Base, docker_engine
 
 class Especie(Base):
     __tablename__ = "especie"
