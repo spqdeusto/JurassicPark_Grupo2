@@ -1,5 +1,6 @@
 <template>
   <img src="@/assets/logo.png" alt="" />
+    <p>Nivel alarma: {{result.nivel}} </p>
   <nav>
     <router-link to="/">Inicio</router-link> |
     <router-link to="/dinosaurios">Dinosaurios</router-link> |
@@ -12,7 +13,19 @@
 </div>
 </template>
 
-
+<script>
+import axios from "axios";
+export default {
+  data: () => ({
+    result: null
+  }),
+  created() {
+    axios.get("http://localhost:8000/alarma").then((result) => {
+      this.result = result.data;
+    })
+  }
+}
+</script>
 
 
 

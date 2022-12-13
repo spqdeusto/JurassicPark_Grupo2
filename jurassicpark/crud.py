@@ -45,7 +45,7 @@ def create_dinosaurio(db: Session, dinosaurio: schemas.Dinosaurio) -> models.Din
             db_dinosaurio (``models.Dinosaurio``): una instancia del objeto de tipo ``models.Dinosaurio`` que hemos creado
             
     '''
-    db_dinosaurio = models.Dinosaurio(nombre = dinosaurio.nombre, especie = dinosaurio.especie, edad = dinosaurio.edad, peso = dinosaurio.peso, sexo = dinosaurio.sexo, es_agresivo = dinosaurio.es_agresivo)
+    db_dinosaurio = models.Dinosaurio(nombre = dinosaurio.nombre, especie = dinosaurio.especie, edad = dinosaurio.edad, peso = dinosaurio.peso, sexo = dinosaurio.sexo)
     db.add(db_dinosaurio)
     db.commit()
     db.refresh(db_dinosaurio)
@@ -122,10 +122,10 @@ def change_sis_seg(db: Session) -> None:
     '''
     nivel = check_alarma(db)
     if nivel >= 2:
-        for todoterreno in get_todoterrenos(db, 0, 100):
+        for todoterreno in get_todoterrenos(db, 100):
             todoterreno.sis_seg = True
     else:
-        for todoterreno in get_todoterrenos(db, 0, 100):
+        for todoterreno in get_todoterrenos(db, 100):
             todoterreno.sis_seg = False
 
     db.commit()
@@ -177,7 +177,7 @@ def get_recintos(db: Session) -> list[models.Recinto]:
     '''
     return db.query(models.Recinto).all()
 
-def get_recinto(db: Session, especie: int) -> models.Recinto:
+def get_recinto_especie(db: Session, especie: int) -> models.Recinto:
     '''
     Método que devuelve el recinto que corresponde a la especie que le pasamos como parámetro.
     
@@ -190,7 +190,20 @@ def get_recinto(db: Session, especie: int) -> models.Recinto:
     '''
     return db.query(models.Recinto).filter(models.Recinto.especie == especie).first()
 
-def change_sis_elec(db: Session, especie: int) -> None:
+def get_recinto_codigo(db: Session, codigo: int) -> models.Recinto:
+    '''
+    Método que devuelve el recinto que corresponde a la especie que le pasamos como parámetro.
+    
+        Parameters:
+            db (Session): instancia de la BBDD
+            especie (int): codigo de especie de los dinosaurios que se encuentran en el recinto que queremos obtener
+        
+        Returns:
+            Un objeto de tipo ``models.Recinto``
+    '''
+    return db.query(models.Recinto).filter(models.Recinto.codigo == codigo).first()
+
+def change_sis_elec(db: Session, codigo: int) -> None:
     '''
     Método que activa y desactiva el sistema eléctrico de un recinto según su especie
     
@@ -198,7 +211,7 @@ def change_sis_elec(db: Session, especie: int) -> None:
             db (Session): instancia de la BBDD
             especie (int): codigo de especie del recinto
     '''
-    recinto = get_recinto(db, especie)
+    recinto = get_recinto_codigo(db, codigo)
     recinto.sis_elec = not recinto.sis_elec
     db.commit()
 
@@ -223,17 +236,17 @@ def check_alarma(db: Session) -> int:
     '''
     db_max = db.query(models.Recinto).filter_by(sis_elec = False).\
             join(models.Recinto.todoterrenos).filter_by(ruta = True).\
-            join(models.Recinto.dinosaurios).filter_by(es_agresivo = True).first()
+            join(models.Recinto.especies).filter_by(es_agresivo = True).first()
     if db_max != None:
         return 3
     
     db_mid = db.query(models.Recinto).filter_by(sis_elec = False).\
-            join(models.Recinto.dinosaurios).filter_by(es_agresivo = True).first()
+            join(models.Recinto.especies).filter_by(es_agresivo = True).first()
     if db_mid != None:
         return 2
     
     db_low = db.query(models.Recinto).filter_by(sis_elec = False).\
-            join(models.Recinto.dinosaurios).filter_by(es_agresivo = False).first()
+            join(models.Recinto.especies).filter_by(es_agresivo = False).first()
     print(db_low)
     if db_low != None:
         return 1

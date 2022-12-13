@@ -30,13 +30,6 @@
           <option value="H">Hembra</option>
         </select>
       </p>
-      <p>Peligrosidad del dinosaurio:
-        <select v-model="form.es_agresivo">
-          <option disabled selected="">Peligrosidad del dinosaurio</option>
-          <option value="false">Pacífico</option>
-          <option value="true">Agresivo</option>
-        </select>
-      </p>
       <br>
       <div class="form-group">
         <button class="btn btn-primary">Submit</button>

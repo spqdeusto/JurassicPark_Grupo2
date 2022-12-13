@@ -1,13 +1,14 @@
 from sqlalchemy import Boolean, CheckConstraint, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from .database import Base, docker_engine
+from .database import Base, local_engine
 
 class Especie(Base):
     __tablename__ = "especie"
 
     id = Column(Integer, primary_key=True)
     especie = Column(String(25), nullable=False)
+    es_agresivo = Column(Boolean(create_constraint=True), nullable=False)
     recinto = Column(Integer, ForeignKey("recinto.codigo", ondelete="CASCADE"))
 
 class Dinosaurio(Base):
@@ -18,7 +19,6 @@ class Dinosaurio(Base):
     edad = Column(Integer)
     peso = Column(Integer)
     sexo = Column(String(2))
-    es_agresivo = Column(Boolean(create_constraint=True), nullable=False)
 
 
 class Recinto(Base):
@@ -40,4 +40,4 @@ class Todoterreno(Base):
     sis_seg = Column(Boolean(create_constraint=True), nullable=False)
     recinto = Column(Integer, ForeignKey("recinto.codigo", ondelete="CASCADE"), nullable=False)
 
-#models.Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=local_engine)

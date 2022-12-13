@@ -1,16 +1,14 @@
 <template>
-    <div class="about">
-      <h1>Recintos</h1>
-      <h2>Recintos disponibles en el parque:</h2>     
-      <div v-for="recinto in result" class="content">
-        <p>Recinto: {{recinto.nombre}}</p>
-          <button>Eliminar</button>
-          <li v-for="l in languages">
-          {{ l }}
-          </li>
-        
-      </div>
+  <div class="about">
+    <h1>Recintos</h1>
+    <h2>Recintos disponibles en el parque:</h2>
+    <div v-for="recinto in result" class="content">
+      <p>Recinto: {{ recinto.nombre }}</p>
+      <p>Sistema eléctrico: {{ recinto.sis_elec }}</p>
+      <button v-on:click="change_sis(recinto.codigo)">Cambiar sistema</button>
+
     </div>
+  </div>
 </template>
 
 <script>
@@ -20,26 +18,32 @@ export default {
     result: null
   }),
   created() {
-    axios.get("http://localhost:8000/recintos").then((result) => {
-      this.result = result.data;
-    })
+    this.get_recintos()
   },
-  delete() {
-    axios.delete("http://localhost:8000/recintos")
+  methods: {
+    get_recintos: function () {
+      axios.get("http://localhost:8000/recintos").then((result) => {
+        this.result = result.data;
+      })
+    },
+    change_sis: function (codigo) {
+      axios.get("http://localhost:8000/changeelectricidad/" + codigo).then((result) => {
+        this.get_recintos()
+      })
+    }
   }
 };
 </script>
 
 <style>
-
-button{
-  color:darkred
+button {
+  color: darkred
 }
-h2{
+
+h2 {
   font-size: medium;
   margin-top: 3%;
 }
-
 </style>
 
       

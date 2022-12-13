@@ -207,9 +207,9 @@ async def get_recinto(nombre: str, db: Session = Depends(get_db)):
     '''
     return crud.get_recinto(db, nombre=nombre)
 
-@app.get("/changeelectricidad/{especie}")
-async def change_alarma(especie: int, db: Session = Depends(get_db)):
-    crud.change_sis_elec(db, especie)
+@app.get("/changeelectricidad/{codigo}")
+async def change_alarma(codigo: int, db: Session = Depends(get_db)):
+    crud.change_sis_elec(db, codigo)
     crud.change_sis_seg(db)
     return {"success" : True}
 
