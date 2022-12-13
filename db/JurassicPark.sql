@@ -38,11 +38,9 @@ CREATE TABLE `dinosaurio` (
   `edad` int DEFAULT NULL,
   `peso` int DEFAULT NULL,
   `sexo` varchar(2) DEFAULT NULL,
-  `es_agresivo` tinyint(1) NOT NULL,
   PRIMARY KEY (`nombre`),
   KEY `especie` (`especie`),
-  CONSTRAINT `dinosaurio_ibfk_1` FOREIGN KEY (`especie`) REFERENCES `especie` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `dinosaurio_chk_1` CHECK ((`es_agresivo` in (0,1)))
+  CONSTRAINT `dinosaurio_ibfk_1` FOREIGN KEY (`especie`) REFERENCES `especie` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,7 +50,7 @@ CREATE TABLE `dinosaurio` (
 
 LOCK TABLES `dinosaurio` WRITE;
 /*!40000 ALTER TABLE `dinosaurio` DISABLE KEYS */;
-INSERT INTO `dinosaurio` VALUES ('Ainhoa',1,40,240,'H',1),('Aitor',1,23,100,'M',1),('Alvaro',1,60,300,'M',1),('Ana',6,900,967,'H',0),('Andrea',5,88,889,'H',0),('Ane',2,208,150,'H',1),('Anton',3,500,600,'M',1),('Aritz',3,10,40,'M',1),('Borja',4,5,20,'M',0),('Elena',3,15,30,'M',1),('Elvira',7,41,245,'H',0),('Ester',5,74,770,'H',0),('Fonsi',7,18,100,'M',0),('Gorka',2,100,220,'M',1),('Iker',2,45,130,'H',1),('Irati',5,44,766,'H',0),('Irene',4,22,240,'H',0),('Javier',7,82,666,'M',0),('Jose',4,77,383,'M',0),('Juan',3,30,87,'M',1),('Laura',4,47,99,'H',0),('Leire',5,66,400,'H',0),('Mamen',4,90,900,'H',0),('Maria',6,21,210,'M',0),('Mertxe',5,58,98,'H',0),('Monica',6,90,240,'H',0),('Naroa',1,22,200,'H',1),('Olatz',2,400,280,'H',1),('Pablo',6,85,765,'M',0),('Paloma',7,99,906,'H',0),('Paul',3,550,320,'M',1),('Ruben',1,300,350,'M',1),('Sebastian',6,600,600,'H',0),('Tristan',7,11,35,'M',0),('Unai',2,70,110,'M',1);
+INSERT INTO `dinosaurio` VALUES ('Ainhoa',1,40,240,'H'),('Aitor',1,23,100,'M'),('Alvaro',1,60,300,'M'),('Ana',6,900,967,'H'),('Andrea',5,88,889,'H'),('Ane',2,208,150,'H'),('Anton',3,500,600,'M'),('Aritz',3,10,40,'M'),('Borja',4,5,20,'M'),('Elena',3,15,30,'M'),('Elvira',7,41,245,'H'),('Ester',5,74,770,'H'),('Fonsi',7,18,100,'M'),('Gorka',2,100,220,'M'),('Iker',2,45,130,'H'),('Irati',5,44,766,'H'),('Irene',4,22,240,'H'),('Javier',7,82,666,'M'),('Jose',4,77,383,'M'),('Juan',3,30,87,'M'),('Laura',4,47,99,'H'),('Leire',5,66,400,'H'),('Mamen',4,90,900,'H'),('Maria',6,21,210,'M'),('Mertxe',5,58,98,'H'),('Monica',6,90,240,'H'),('Naroa',1,22,200,'H'),('Olatz',2,400,280,'H'),('Pablo',6,85,765,'M'),('Paloma',7,99,906,'H'),('Paul',3,550,320,'M'),('Ruben',1,300,350,'M'),('Sebastian',6,600,600,'H'),('Tristan',7,11,35,'M'),('Unai',2,70,110,'M');
 /*!40000 ALTER TABLE `dinosaurio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,10 +64,12 @@ DROP TABLE IF EXISTS `especie`;
 CREATE TABLE `especie` (
   `id` int NOT NULL AUTO_INCREMENT,
   `especie` varchar(25) NOT NULL,
+  `es_agresivo` tinyint(1) NOT NULL,
   `recinto` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `recinto` (`recinto`),
-  CONSTRAINT `especie_ibfk_1` FOREIGN KEY (`recinto`) REFERENCES `recinto` (`codigo`) ON DELETE CASCADE
+  CONSTRAINT `especie_ibfk_1` FOREIGN KEY (`recinto`) REFERENCES `recinto` (`codigo`) ON DELETE CASCADE,
+  CONSTRAINT `especie_chk_1` CHECK ((`es_agresivo` in (0,1)))
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -79,7 +79,7 @@ CREATE TABLE `especie` (
 
 LOCK TABLES `especie` WRITE;
 /*!40000 ALTER TABLE `especie` DISABLE KEYS */;
-INSERT INTO `especie` VALUES (1,'Dilophosaurus',1),(2,'T-Rex',2),(3,'Velociraptor',3),(4,'Brachiosaurus',4),(5,'Parasaulophus',4),(6,'Galliminus',5),(7,'Triceratops',6);
+INSERT INTO `especie` VALUES (1,'Dilophosaurus',1,1),(2,'T-Rex',1,2),(3,'Velociraptor',1,3),(4,'Brachiosaurus',0,4),(5,'Parasaulophus',0,4),(6,'Galliminus',0,5),(7,'Triceratops',0,6);
 /*!40000 ALTER TABLE `especie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,4 +150,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29 12:47:35
+-- Dump completed on 2022-12-13 10:57:34
